@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical"
+    tools:context="pnj.ti.b2013.smartparent.view.studentBalance.BalanceActivity">
+
+
+            <RelativeLayout
+                android:id="@+id/studentEmptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/toolbar_igrow" />
+
+                <FrameLayout
+                    android:id="@+id/mainFrameContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/mainToolbar">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/large_padding"
+                        android:layout_marginRight="@dimen/large_padding"
+                        android:orientation="vertical">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/studentName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Nama Anak" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/classOfStudent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Kelas 3 Madinah" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/small_padding"
+                            android:text="Jenis Izin"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/permitType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/small_padding"
+                            android:text="Keterangan"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/permitDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="7" />
+
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/large_padding"
+                            android:background="@drawable/selectable_primary"
+                            android:text="Submit"
+                            android:textColor="@color/button_title_color" />
+
+                    </LinearLayout>
+
+
+
+
+                </FrameLayout>
+
+            </RelativeLayout>
+
+
+
+</LinearLayout>

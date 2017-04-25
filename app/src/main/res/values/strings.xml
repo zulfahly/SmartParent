@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Smart Parent</string>
+
+
+    <string name="failed">Failed</string>
+    <string name="success">Success</string>
+    <string name="no_response">No response from server.\nPlease try again later.</string>
+    <string name="no_internet">No internet connection.</string>
+    <string name="internal_server_error">Internal server error.</string>
+
+    <string name="play_service_title">Google Play Service Not Available</string>
+    <string name="play_service_content">You Must Download Google Play Service.</string>
+    <string name="play_service_waiting">Initializing apps, please wait.</string>
+
+    <string name="loading">Please Wait</string>
+    <string name="login_loading">Logging In</string>
+
+    <string name="pull_to_refresh">Pull To Refresh</string>
+
+
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="img_desc">Image Description</string>
+    <string name="empty_username">Username is required</string>
+    <string name="empty_password">Password is required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

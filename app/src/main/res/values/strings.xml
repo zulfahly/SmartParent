@@ -14,6 +14,7 @@
 
     <string name="loading">Please Wait</string>
     <string name="login_loading">Logging In</string>
+    <string name="downloading">Downloading data</string>
 
     <string name="pull_to_refresh">Pull To Refresh</string>
 

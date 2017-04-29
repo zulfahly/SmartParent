@@ -64,4 +64,9 @@ public class Student implements Parcelable
         parcel.writeString(status);
         parcel.writeString(tahun_angkatan);
     }
+
+    @Override
+    public String toString() {
+        return nama_siswa;
+    }
 }

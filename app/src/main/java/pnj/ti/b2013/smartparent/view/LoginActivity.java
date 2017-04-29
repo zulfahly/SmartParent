@@ -130,6 +130,7 @@ public class LoginActivity extends BaseActivity {
         if (success) {
             switch (type) {
                 case VolleyTaskService.REQ_TYPE_LOGIN:
+                    progressDialog.dismiss();
                     Preferences.getInstance(this).storeString(Preferences.PROFILE, extras.getString(VolleyTaskService.RESPONSE_DATA));
 
                     Intent intent = new Intent(this, SelectStudentActivity.class);
@@ -140,7 +141,6 @@ public class LoginActivity extends BaseActivity {
 //                    }
                     intent.putExtras(extras);
                     Log.e(TAG,"Extras : login "+extras);
-                    Toast.makeText(this,"Login Receive",Toast.LENGTH_LONG).show();
                     startActivity(intent);
                     finish();
 

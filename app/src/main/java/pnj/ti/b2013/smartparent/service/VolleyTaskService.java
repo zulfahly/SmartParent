@@ -54,8 +54,8 @@ public class VolleyTaskService extends Service {
 
     private static final String API_ENDPOINT = "http://api.dasmartschool.com";
 
-    private static final String LOGIN_URL = "smartschool/login_ortu";
-    private static final String STUDENTLIST_URL = "smartschool/get_student_list";
+    private static final String LOGIN_URL = "smartparent/login_ortu";
+    private static final String STUDENTLIST_URL = "smartparent/get_student_list";
 
 
     // bound activity

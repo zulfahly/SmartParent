@@ -1,6 +1,9 @@
 package pnj.ti.b2013.smartparent.view.student;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +16,17 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import pnj.ti.b2013.smartparent.R;
+import pnj.ti.b2013.smartparent.interfaces.Mainlistener;
 import pnj.ti.b2013.smartparent.model.Student;
 import pnj.ti.b2013.smartparent.service.VolleyTaskService;
 import pnj.ti.b2013.smartparent.view.BaseActivity;
+import pnj.ti.b2013.smartparent.view.MainActivity;
 
-public class SelectStudentActivity extends BaseActivity {
+public class SelectStudentActivity extends BaseActivity implements SelectStudentAdapter.StudentListener {
 
     String TAG = SelectStudentActivity.class.getSimpleName();
 
@@ -30,36 +36,42 @@ public class SelectStudentActivity extends BaseActivity {
     private List<Student> arrayListstudent;
     private RecyclerView studentRecycler;
     private RelativeLayout emptyView;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_student);
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage(getString(R.string.downloading));
+        pDialog.setCancelable(false);
+        pDialog.show();
         username = getIntent().getStringExtra("username");
         Log.e(TAG,"Extras: "+username);
-        initUI();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+               initUI();
+            }
+        }, 3000);
+
 
     }
 
     private void initUI(){
         setToolbarUseImage(false);
-        getStudentlist();
+        pDialog.dismiss();
+        arrayListstudent = new ArrayList<>();
+        studentAdapter = new SelectStudentAdapter(getApplicationContext(),arrayListstudent, this);
 
-        studentAdapter = new SelectStudentAdapter(this, arrayListstudent);
-
-//        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.sponsorSwipeRefresh);
         studentRecycler = (RecyclerView) findViewById(R.id.studentRecyclerView);
         emptyView = (RelativeLayout) findViewById(R.id.studentEmptyView);
 
-//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                refreshSponsorList();
-//            }
-//        });
 
         studentRecycler.setLayoutManager(new LinearLayoutManager(this));
         studentRecycler.setAdapter(studentAdapter);
+
 
         emptyView.setVisibility(studentAdapter.getItemCount() == 0 ? View.VISIBLE : View.INVISIBLE);
         emptyView.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +81,7 @@ public class SelectStudentActivity extends BaseActivity {
             }
         });
 
+        getStudentlist();
     }
 
 
@@ -77,7 +90,7 @@ public class SelectStudentActivity extends BaseActivity {
         if (getTaskService() != null) {
             getTaskService().studentList(username);
         } else {
-            Toast.makeText(this, "TASK Service : " + getTaskService(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Check Your Connection", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -87,11 +100,8 @@ public class SelectStudentActivity extends BaseActivity {
             String data = extras.getString(VolleyTaskService.RESPONSE_DATA);
             switch (type) {
                 case VolleyTaskService.REQ_TYPE_STUDENT_LIST:
-                    Toast.makeText(this,"Data student",Toast.LENGTH_LONG).show();
+                    updateData(data);
                     Log.e(TAG,"Student Data "+data);
-                      Type studentList = new TypeToken<List<Student>>() {
-                    }.getType();
-                    arrayListstudent = new Gson().fromJson(data, studentList);
                     break;
             }
         } else {
@@ -101,5 +111,28 @@ public class SelectStudentActivity extends BaseActivity {
                     .show();
         }
 
+    }
+
+    public void updateData(String data){
+        List<Student> listStudent = new Gson().fromJson(data, new TypeToken<List<Student>>() {
+        }.getType());
+        Log.e(TAG,"DATA LIST"+data);
+
+        studentAdapter.updateData(listStudent);
+
+        this.arrayListstudent.clear();
+        this.arrayListstudent.addAll(listStudent);
+
+    }
+
+    @Override
+    public void onSelectStudent(Student item) {
+        Bundle extras = new Bundle();
+        extras.putParcelable("NIS", student);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtras(extras);
+
+        startActivity(intent);
     }
 }

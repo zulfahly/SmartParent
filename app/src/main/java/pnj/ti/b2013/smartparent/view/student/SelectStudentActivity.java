@@ -128,7 +128,7 @@ public class SelectStudentActivity extends BaseActivity implements SelectStudent
     @Override
     public void onSelectStudent(Student item) {
         Bundle extras = new Bundle();
-        extras.putParcelable("NIS", student);
+        extras.putParcelable("student", item);
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtras(extras);

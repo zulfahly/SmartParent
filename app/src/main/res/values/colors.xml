@@ -17,4 +17,5 @@
 
     <color name="divider">#bebebe</color>
     <color name="gray_background">#dedede</color>
+    <color name="less_white">#f1f1f1</color>
 </resources>

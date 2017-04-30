@@ -19,6 +19,7 @@ public class Student implements Parcelable
     public String foto;
     public String status;
     public String tahun_angkatan;
+    public String debit;
 
 
     protected Student(Parcel in) {
@@ -32,6 +33,7 @@ public class Student implements Parcelable
         foto = in.readString();
         status = in.readString();
         tahun_angkatan = in.readString();
+        debit = in.readString();
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
@@ -63,6 +65,7 @@ public class Student implements Parcelable
         parcel.writeString(foto);
         parcel.writeString(status);
         parcel.writeString(tahun_angkatan);
+        parcel.writeString(debit);
     }
 
     @Override

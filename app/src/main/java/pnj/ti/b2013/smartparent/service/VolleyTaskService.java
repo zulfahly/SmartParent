@@ -49,6 +49,7 @@ public class VolleyTaskService extends Service {
     public static final int REQ_TYPE_LOGIN = 1;
     public static final int REQ_TYPE_LOGOUT = 2;
     public static final int REQ_TYPE_STUDENT_LIST = 3;
+    public static final int REQ_TYPE_STUDENT_PRESENCE = 4;
 
 
 
@@ -56,6 +57,7 @@ public class VolleyTaskService extends Service {
 
     private static final String LOGIN_URL = "smartparent/login_ortu";
     private static final String STUDENTLIST_URL = "smartparent/get_student_list";
+    private static final String DATA_PRESENSI = "smartparent/get_presensi_siswa";
 
 
     // bound activity
@@ -219,6 +221,14 @@ public class VolleyTaskService extends Service {
 
         StringRequest request = composeStringRequest(Request.Method.POST, getURL(STUDENTLIST_URL), REQ_TYPE_STUDENT_LIST, params, null);
         addToRequestQueue(REQ_TYPE_STUDENT_LIST, request);
+    }
+
+    public void studentPrecenseList(String NIS) {
+        Map<String, String> params = new HashMap<>();
+        params.put("NIS", NIS);
+
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(DATA_PRESENSI), REQ_TYPE_STUDENT_PRESENCE, params, null);
+        addToRequestQueue(REQ_TYPE_STUDENT_PRESENCE, request);
     }
 
 

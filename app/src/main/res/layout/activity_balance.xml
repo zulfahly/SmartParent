@@ -43,8 +43,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/ic_uang_saku"/>
 
                     <TextView
@@ -54,7 +54,8 @@
                         android:layout_weight="2"
                         android:fitsSystemWindows="true"
                         android:text="Saldo"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textSize="25sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -67,9 +68,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Rp.100.000" />
+                        android:textSize="25sp"
+                        />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Riwayat Pengisian"
+                    android:layout_margin="@dimen/large_padding"
+                    android:textSize="18sp"/>
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -94,7 +103,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
-                            android:text="14:00 31-05-2013" />
+                             />
 
 
                         <TextView
@@ -102,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
-                            android:text="Sejumlah Rp.100.000" />
+                             />
 
                     </LinearLayout>
 

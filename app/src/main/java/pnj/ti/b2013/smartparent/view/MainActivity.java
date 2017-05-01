@@ -102,7 +102,11 @@ public class MainActivity extends BaseActivity {
         uangsakuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle extras = new Bundle();
+                extras.putParcelable("student",student);
+
                 Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });

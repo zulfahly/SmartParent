@@ -83,14 +83,6 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/loginForgotPasswordLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/large_padding"
-                android:text="@string/forgot_password" />
-
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
@@ -99,20 +91,6 @@
                 android:height="@dimen/action_button_min_height_material"
                 android:background="@drawable/selectable_primary"
                 android:text="@string/login"
-                android:textColor="@color/button_title_color"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/large_padding"
-                android:layout_marginLeft="@dimen/large_padding"/>
-
-            <Button
-                android:id="@+id/profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:height="@dimen/action_button_min_height_material"
-                android:background="@drawable/selectable_primary"
-                android:text="profile"
                 android:textColor="@color/button_title_color"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"

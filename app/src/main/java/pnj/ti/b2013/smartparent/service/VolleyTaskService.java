@@ -57,7 +57,7 @@ public class VolleyTaskService extends Service {
 
     private static final String LOGIN_URL = "smartparent/login_ortu";
     private static final String STUDENTLIST_URL = "smartparent/get_student_list";
-    private static final String DATA_PRESENSI = "smartparent/get_presensi_siswa";
+    private static final String DATA_PRESENSI_URL = "smartparent/get_presensi_siswa";
 
 
     // bound activity
@@ -225,9 +225,9 @@ public class VolleyTaskService extends Service {
 
     public void studentPrecenseList(String NIS) {
         Map<String, String> params = new HashMap<>();
-        params.put("NIS", NIS);
+        params.put("nis", NIS);
 
-        StringRequest request = composeStringRequest(Request.Method.POST, getURL(DATA_PRESENSI), REQ_TYPE_STUDENT_PRESENCE, params, null);
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(DATA_PRESENSI_URL), REQ_TYPE_STUDENT_PRESENCE, params, null);
         addToRequestQueue(REQ_TYPE_STUDENT_PRESENCE, request);
     }
 

@@ -66,7 +66,11 @@ public class MainActivity extends BaseActivity {
         presensiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle extras = new Bundle();
+                extras.putParcelable("student",student);
+
                 Intent intent = new Intent(MainActivity.this, PresenceActivity.class);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });

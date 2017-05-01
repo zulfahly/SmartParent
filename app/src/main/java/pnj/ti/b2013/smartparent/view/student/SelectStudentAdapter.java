@@ -51,14 +51,13 @@ public class SelectStudentAdapter extends RecyclerView.Adapter<SelectStudentAdap
         holder.className.setText(holder.student.nama_kelas);
 
 
-        Glide.with(context).load(holder.student.foto).placeholder(R.mipmap.ic_launcher).into(holder.photo);
+        Glide.with(context).load(holder.student.foto).placeholder(R.drawable.ic_profile).into(holder.photo);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (null != listener) {
                     listener.onSelectStudent(holder.student);
-                    Log.e(TAG,"CLICKED STUDENT-");
                 }else{
                     Toast.makeText(context,"NO LISTENER",Toast.LENGTH_LONG).show();
                 }

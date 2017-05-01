@@ -31,8 +31,7 @@ public class LoginActivity extends BaseActivity {
 
     EditText usernameField;
     EditText passwordField;
-    TextView forgotPasswordLabel;
-    Button loginButton, profileActivity;
+    Button loginButton;
     ProgressDialog progressDialog;
 
     @Override
@@ -54,18 +53,7 @@ public class LoginActivity extends BaseActivity {
         // outlets
         usernameField = (EditText) findViewById(R.id.loginUsernameField);
         passwordField = (EditText) findViewById(R.id.loginPasswordField);
-        forgotPasswordLabel = (TextView) findViewById(R.id.loginForgotPasswordLabel);
         loginButton = (Button) findViewById(R.id.loginButton);
-        profileActivity = (Button) findViewById(R.id.profile);
-
-        profileActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, PickUpStudentActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -78,13 +66,6 @@ public class LoginActivity extends BaseActivity {
         }, 3000);
 
         // listeners
-        forgotPasswordLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                forgotPassword();
-            }
-        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

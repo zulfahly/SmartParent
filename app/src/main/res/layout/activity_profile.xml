@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar_igrow"/>
+        <include layout="@layout/toolbar_igrow" />
 
         <FrameLayout
             android:id="@+id/mainFrameContainer"
@@ -30,11 +30,18 @@
                     android:layout_margin="@dimen/large_padding"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/parentName"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nama orang tua" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/parentName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nama orang tua"
+                            android:textColor="#000" />
+                    </android.support.design.widget.TextInputLayout>
+
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -44,7 +51,8 @@
                             android:id="@+id/studentName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Tsabit Maulana Ahmad" />
+                            android:hint="Nama Siswa"
+                            android:textColor="#000" />
                     </android.support.design.widget.TextInputLayout>
 
 
@@ -53,10 +61,10 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/PhoneNumber"
+                            android:id="@+id/phoneNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="08297273732"
+                            android:hint="Nomor Telepon"
                             android:inputType="number" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +76,7 @@
                             android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Jalan lalalalala" />
+                            android:hint="Alamat" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.v7.widget.AppCompatButton
@@ -77,24 +85,24 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/large_padding"
                         android:background="@drawable/selectable_primary"
-                        android:textColor="@color/button_title_color"
-                        android:text="Submit"/>
+                        android:text="Simpan"
+                        android:textColor="@color/button_title_color" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/large_padding"
                         android:background="@drawable/selectable_secondary"
-                        android:textColor="@color/button_title_color"
-                        android:text="Ganti Password"/>
+                        android:text="Ganti Password"
+                        android:textColor="@color/button_title_color" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/large_padding"
                         android:background="@drawable/selectable_secondary"
-                        android:textColor="@color/button_title_color"
-                        android:text="Logout"/>
+                        android:text="Logout"
+                        android:textColor="@color/button_title_color" />
 
 
                 </LinearLayout>
@@ -103,8 +111,6 @@
         </FrameLayout>
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

@@ -52,6 +52,7 @@ public class VolleyTaskService extends Service {
     public static final int REQ_TYPE_STUDENT_PRESENCE = 4;
     public static final int REQ_TYPE_ADD_IZIN = 5;
     public static final int REQ_TYPE_CHECK_BALANCE = 6;
+    public static final int REQ_TYPE_PROFILE = 7;
 
 
     private static final String API_ENDPOINT = "http://api.dasmartschool.com";
@@ -61,7 +62,7 @@ public class VolleyTaskService extends Service {
     private static final String DATA_PRESENSI_URL = "smartparent/get_presensi_siswa";
     private static final String ADD_IZIN_URL = "smartparent/add_izin";
     private static final String CHECK_BALANCE_URL = "smartparent/get_uang_saku";
-
+    private static final String CHECK_PROFILE_URL = "smartparent/get_profile";
 
     // bound activity
     private Callback activityCallback;
@@ -252,6 +253,13 @@ public class VolleyTaskService extends Service {
         addToRequestQueue(REQ_TYPE_CHECK_BALANCE, request);
     }
 
+    public void checkProfile(final String username) {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(CHECK_PROFILE_URL), REQ_TYPE_PROFILE, params, null);
+        addToRequestQueue(REQ_TYPE_PROFILE, request);
+    }
 
 
 }

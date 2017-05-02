@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 
+import com.google.gson.Gson;
+
+import pnj.ti.b2013.smartparent.model.Profile;
+
 /**
  * Created by badrinteractive on 3/19/16.
  */
@@ -61,6 +65,10 @@ public class Preferences {
 
     public int getNotifId(String key){
         return sharedPreferences.getInt(key,0);
+    }
+
+    public Profile getProfile() {
+        return new Gson().fromJson(getString(PROFILE), Profile.class);
     }
 
 }

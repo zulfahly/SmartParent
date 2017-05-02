@@ -87,7 +87,7 @@ public class BalanceActivity extends BaseActivity {
 
                     if (balanceList!=null){
                         balanceDateHistory.setText(balanceList.get(0).tanggal);
-                        topupBalanceHistory.setText(getString(R.string.sejumlah)+getString(R.string.rupiah) +balanceList.get(0).jumlah_debit);
+                        topupBalanceHistory.setText(getString(R.string.sejumlah)+" "+getString(R.string.rupiah) +balanceList.get(0).jumlah_debit);
                     }
                     break;
             }

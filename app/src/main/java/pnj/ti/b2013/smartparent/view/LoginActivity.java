@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import pnj.ti.b2013.smartparent.R;
+import pnj.ti.b2013.smartparent.model.Profile;
 import pnj.ti.b2013.smartparent.service.VolleyTaskService;
 import pnj.ti.b2013.smartparent.util.Preferences;
 import pnj.ti.b2013.smartparent.view.notification.NotificationActivity;
@@ -39,6 +40,24 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         progressDialog = new ProgressDialog(this);
+
+
+        Profile profile = Preferences.getInstance(this).getProfile();
+        if (profile != null) {
+            Bundle extras = new Bundle();
+            Intent intent = new Intent(this, SelectStudentActivity.class);
+            intent.putExtras(extras);
+
+            if (getIntent() != null && getIntent().getExtras() != null) {
+                intent.putExtras(getIntent().getExtras());
+            }
+
+            startActivity(intent);
+            finish();
+
+            return;
+        }
+
 
         // wait for gcm
         progressDialog.setMessage(getString(R.string.play_service_waiting));
@@ -115,24 +134,17 @@ public class LoginActivity extends BaseActivity {
                     Preferences.getInstance(this).storeString(Preferences.PROFILE, extras.getString(VolleyTaskService.RESPONSE_DATA));
 
                     Intent intent = new Intent(this, SelectStudentActivity.class);
-                    extras.putString("username",usernameField.getText().toString());
+//                    extras.putString("username",usernameField.getText().toString());
 
-//                    if (getIntent() != null && getIntent().getExtras() != null) {
-//                        intent.putExtras(getIntent().getExtras());
-//                    }
-                    intent.putExtras(extras);
+                    if (getIntent() != null && getIntent().getExtras() != null) {
+                        intent.putExtras(getIntent().getExtras());
+                    }
+
                     Log.e(TAG,"Extras : login "+extras);
                     startActivity(intent);
                     finish();
 
                     break;
-
-//                case VolleyTaskService.REQ_TYPE_FORGOT_PASSWORD:
-//                    new AlertDialog.Builder(this)
-//                            .setTitle(getString(R.string.success))
-//                            .setMessage(extras.getString(VolleyTaskService.RESPONSE_MESSAGE))
-//                            .show();
-//                    break;
             }
         } else {
             new AlertDialog.Builder(this)

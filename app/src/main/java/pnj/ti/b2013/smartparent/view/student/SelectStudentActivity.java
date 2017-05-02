@@ -21,8 +21,10 @@ import java.util.List;
 
 import pnj.ti.b2013.smartparent.R;
 import pnj.ti.b2013.smartparent.interfaces.Mainlistener;
+import pnj.ti.b2013.smartparent.model.Profile;
 import pnj.ti.b2013.smartparent.model.Student;
 import pnj.ti.b2013.smartparent.service.VolleyTaskService;
+import pnj.ti.b2013.smartparent.util.Preferences;
 import pnj.ti.b2013.smartparent.view.BaseActivity;
 import pnj.ti.b2013.smartparent.view.MainActivity;
 
@@ -37,6 +39,7 @@ public class SelectStudentActivity extends BaseActivity implements SelectStudent
     private RecyclerView studentRecycler;
     private RelativeLayout emptyView;
     private ProgressDialog pDialog;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,8 @@ public class SelectStudentActivity extends BaseActivity implements SelectStudent
         pDialog.setMessage(getString(R.string.downloading));
         pDialog.setCancelable(false);
         pDialog.show();
-        username = getIntent().getStringExtra("username");
+        profile = Preferences.getInstance(this).getProfile();
+
         Log.e(TAG,"Extras: "+username);
 
         Handler handler = new Handler();
@@ -87,8 +91,9 @@ public class SelectStudentActivity extends BaseActivity implements SelectStudent
 
     private void getStudentlist()
     {
+
         if (getTaskService() != null) {
-            getTaskService().studentList(username);
+            getTaskService().studentList(profile.username);
         } else {
             Toast.makeText(this, "Check Your Connection", Toast.LENGTH_LONG).show();
         }

@@ -1,8 +1,13 @@
 package pnj.ti.b2013.smartparent.view;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +26,7 @@ import pnj.ti.b2013.smartparent.view.studentBalance.BalanceActivity;
 public class MainActivity extends BaseActivity {
 
     String TAG = MainActivity.class.getSimpleName();
+    final static int REQUEST_PHONE_CALL = 1;
 
     TextView studentName;
     TextView className;
@@ -32,6 +38,7 @@ public class MainActivity extends BaseActivity {
     LinearLayout uangsakuBtn;
     LinearLayout pesanBtn;
     LinearLayout profilBtn;
+    LinearLayout phoneCall;
 
     Student student;
 
@@ -44,7 +51,7 @@ public class MainActivity extends BaseActivity {
 
     private void initUI() {
         student = getIntent().getParcelableExtra("student");
-        Log.e(TAG,"extras student"+student);
+        Log.e(TAG, "extras student" + student);
 
         setToolbarUseImage(false);
 
@@ -58,16 +65,17 @@ public class MainActivity extends BaseActivity {
         uangsakuBtn = (LinearLayout) findViewById(R.id.linUangsaku);
         pesanBtn = (LinearLayout) findViewById(R.id.linPesan);
         profilBtn = (LinearLayout) findViewById(R.id.linProfile);
+        phoneCall = (LinearLayout) findViewById(R.id.linPhonecall);
 
         studentName.setText(student.nama_siswa);
-        className.setText(getString(R.string.darul_abidin)+" "+getString(R.string.kelas)+" "+student.nama_kelas);
-        studentBalance.setText(getString(R.string.rupiah)+student.debit);
+        className.setText(getString(R.string.darul_abidin) + " " + getString(R.string.kelas) + " " + student.nama_kelas);
+        studentBalance.setText(getString(R.string.rupiah) + student.debit);
 
         presensiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle extras = new Bundle();
-                extras.putParcelable("student",student);
+                extras.putParcelable("student", student);
 
                 Intent intent = new Intent(MainActivity.this, PresenceActivity.class);
                 intent.putExtras(extras);
@@ -87,7 +95,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Bundle extras = new Bundle();
-                extras.putParcelable("student",student);
+                extras.putParcelable("student", student);
 
                 Intent intent = new Intent(MainActivity.this, PermitActivity.class);
                 intent.putExtras(extras);
@@ -107,7 +115,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Bundle extras = new Bundle();
-                extras.putParcelable("student",student);
+                extras.putParcelable("student", student);
 
                 Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
                 intent.putExtras(extras);
@@ -127,11 +135,42 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Bundle extras = new Bundle();
-                extras.putParcelable("student",student);
+                extras.putParcelable("student", student);
 
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtras(extras);
                 startActivity(intent);
+            }
+        });
+
+        phoneCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG,"CALL CLICKED");
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:02177802989"));
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+                }
+                else
+                {
+                    startActivity(intent);
+                }
+
+
+
+//                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    // TODO: Consider calling
+//                    //    ActivityCompat#requestPermissions
+//                    // here to request the missing permissions, and then overriding
+//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                    //                                          int[] grantResults)
+//                    // to handle the case where the user grants the permission. See the documentation
+//                    // for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
+//
+//                startActivity(callIntent);
             }
         });
     }

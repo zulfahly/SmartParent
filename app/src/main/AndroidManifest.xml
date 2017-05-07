@@ -17,7 +17,7 @@
         android:roundIcon="@drawable/ic_smartparent"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +37,8 @@
 
         <service android:name=".service.VolleyTaskService" />
 
-        <activity android:name=".view.phonecall.PhonecallActivity"></activity>
+        <activity android:name=".view.phonecall.PhonecallActivity" />
+        <activity android:name=".view.canteen.CanteenActivity"></activity>
     </application>
 
 </manifest>

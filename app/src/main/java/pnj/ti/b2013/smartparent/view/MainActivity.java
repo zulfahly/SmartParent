@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import pnj.ti.b2013.smartparent.R;
 import pnj.ti.b2013.smartparent.model.Student;
+import pnj.ti.b2013.smartparent.view.canteen.CanteenActivity;
+import pnj.ti.b2013.smartparent.view.canteen.CanteenAdapter;
 import pnj.ti.b2013.smartparent.view.message.MessageActivity;
 import pnj.ti.b2013.smartparent.view.notification.NotificationActivity;
 import pnj.ti.b2013.smartparent.view.permit.PermitActivity;
@@ -39,6 +41,7 @@ public class MainActivity extends BaseActivity {
     LinearLayout pesanBtn;
     LinearLayout profilBtn;
     LinearLayout phoneCall;
+    LinearLayout kantinBtn;
 
     Student student;
 
@@ -66,6 +69,7 @@ public class MainActivity extends BaseActivity {
         pesanBtn = (LinearLayout) findViewById(R.id.linPesan);
         profilBtn = (LinearLayout) findViewById(R.id.linProfile);
         phoneCall = (LinearLayout) findViewById(R.id.linPhonecall);
+        kantinBtn = (LinearLayout) findViewById(R.id.linKantin);
 
         studentName.setText(student.nama_siswa);
         className.setText(getString(R.string.darul_abidin) + " " + getString(R.string.kelas) + " " + student.nama_kelas);
@@ -156,21 +160,18 @@ public class MainActivity extends BaseActivity {
                 {
                     startActivity(intent);
                 }
+            }
+        });
 
+        kantinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extras = new Bundle();
+                extras.putParcelable("student", student);
 
-
-//                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//
-//                startActivity(callIntent);
+                Intent intent = new Intent(MainActivity.this, CanteenActivity.class);
+                intent.putExtras(extras);
+                startActivity(intent);
             }
         });
     }

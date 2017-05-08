@@ -19,6 +19,7 @@ import pnj.ti.b2013.smartparent.service.VolleyTaskService;
 import pnj.ti.b2013.smartparent.util.Preferences;
 import pnj.ti.b2013.smartparent.view.BaseActivity;
 import pnj.ti.b2013.smartparent.view.MainActivity;
+import pnj.ti.b2013.smartparent.view.canteen.CanteenActivity;
 
 public class ProfileActivity extends BaseActivity {
 
@@ -69,7 +70,12 @@ public class ProfileActivity extends BaseActivity {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle extras = new Bundle();
+                extras.putParcelable("student", student);
 
+                Intent intent = new Intent(ProfileActivity.this, ChangePassword.class);
+                intent.putExtras(extras);
+                startActivity(intent);
             }
         });
 

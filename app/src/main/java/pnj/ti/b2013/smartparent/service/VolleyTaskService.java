@@ -55,6 +55,8 @@ public class VolleyTaskService extends Service {
     public static final int REQ_TYPE_PROFILE = 7;
     public static final int REQ_TYPE_EDIT_PROFILE = 8;
     public static final int REQ_TYPE_SEND_PICKUP = 9;
+    public static final int REQ_TYPE_EDIT_PASSWORD = 10;
+
 
 
     private static final String API_ENDPOINT = "http://api.dasmartschool.com";
@@ -67,6 +69,7 @@ public class VolleyTaskService extends Service {
     private static final String CHECK_PROFILE_URL = "smartparent/get_profile";
     private static final String EDIT_PROFILE_URL = "smartparent/edit_profile";
     private static final String ADD_PICKUP_URL = "smartparent/add_penjemputan";
+    private static final String EDIT_PASSWORD_URL = "smartparent/edit_password";
 
     // bound activity
     private Callback activityCallback;
@@ -285,6 +288,16 @@ public class VolleyTaskService extends Service {
 
         StringRequest request = composeStringRequest(Request.Method.POST, getURL(ADD_PICKUP_URL), REQ_TYPE_SEND_PICKUP, params, null);
         addToRequestQueue(REQ_TYPE_SEND_PICKUP, request);
+    }
+
+    public void editPassword(final String username, String oldPassword, String newPassword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password_lama", oldPassword);
+        params.put("password_baru", newPassword);
+
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(EDIT_PASSWORD_URL), REQ_TYPE_EDIT_PASSWORD, params, null);
+        addToRequestQueue(REQ_TYPE_EDIT_PASSWORD, request);
     }
 
 

@@ -43,7 +43,9 @@ public class LoginActivity extends BaseActivity {
 
 
         Profile profile = Preferences.getInstance(this).getProfile();
+
         if (profile != null) {
+            Log.e(TAG,"Prefs :"+Preferences.getInstance(this).getProfile().username);
             Bundle extras = new Bundle();
             Intent intent = new Intent(this, SelectStudentActivity.class);
             intent.putExtras(extras);

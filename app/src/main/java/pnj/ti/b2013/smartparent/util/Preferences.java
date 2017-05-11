@@ -71,4 +71,10 @@ public class Preferences {
         return new Gson().fromJson(getString(PROFILE), Profile.class);
     }
 
+    public Profile clearPreferences(String key) {
+        Profile profile = new Profile();
+        sharedPreferences.edit().remove(key).apply();
+        return profile;
+    }
+
 }

@@ -14,7 +14,10 @@ public class Profile implements Parcelable {
     public String alamat;
     public String nomor_telepon;
 
-    protected Profile(Parcel in) {
+    public Profile() {
+    }
+
+    public Profile(Parcel in) {
         id = in.readString();
         username = in.readString();
         nama_orangtua = in.readString();

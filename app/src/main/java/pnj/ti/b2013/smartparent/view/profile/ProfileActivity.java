@@ -1,6 +1,8 @@
 package pnj.ti.b2013.smartparent.view.profile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,10 +20,14 @@ import pnj.ti.b2013.smartparent.model.Student;
 import pnj.ti.b2013.smartparent.service.VolleyTaskService;
 import pnj.ti.b2013.smartparent.util.Preferences;
 import pnj.ti.b2013.smartparent.view.BaseActivity;
+import pnj.ti.b2013.smartparent.view.LoginActivity;
 import pnj.ti.b2013.smartparent.view.MainActivity;
 import pnj.ti.b2013.smartparent.view.canteen.CanteenActivity;
 
 public class ProfileActivity extends BaseActivity {
+
+    private static final String TAG = ProfileActivity.class.getSimpleName();
+    private static final String PROFILE = "profile";
 
     private EditText parentName;
     private EditText studentName;
@@ -30,6 +36,8 @@ public class ProfileActivity extends BaseActivity {
     private Student student;
     private Profile profile;
     private Button save, changePassword, logout;
+    private Preferences preferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +90,10 @@ public class ProfileActivity extends BaseActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                profile = Preferences.getInstance(ProfileActivity.this).clearPreferences(PROFILE);
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

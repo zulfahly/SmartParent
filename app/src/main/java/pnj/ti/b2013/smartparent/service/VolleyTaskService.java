@@ -290,11 +290,12 @@ public class VolleyTaskService extends Service {
         addToRequestQueue(REQ_TYPE_SEND_PICKUP, request);
     }
 
-    public void editPassword(final String username, String oldPassword, String newPassword) {
+    public void editPassword(final String username, String oldPassword, String newPassword, String retypePassword) {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password_lama", oldPassword);
         params.put("password_baru", newPassword);
+        params.put("retype_password_baru", newPassword);
 
         StringRequest request = composeStringRequest(Request.Method.POST, getURL(EDIT_PASSWORD_URL), REQ_TYPE_EDIT_PASSWORD, params, null);
         addToRequestQueue(REQ_TYPE_EDIT_PASSWORD, request);

@@ -55,7 +55,7 @@ public class ChangePassword extends BaseActivity {
 
     private void changePassword() {
         if (getTaskService().isNetworkAvailable()){
-            getTaskService().editPassword(profile.username,oldPassword.getText().toString(),newPassword.getText().toString());
+            getTaskService().editPassword(profile.username,oldPassword.getText().toString(),newPassword.getText().toString(), repeatPassword.getText().toString());
         }
     }
 

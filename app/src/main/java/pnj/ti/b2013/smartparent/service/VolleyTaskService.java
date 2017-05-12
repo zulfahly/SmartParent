@@ -47,16 +47,16 @@ public class VolleyTaskService extends Service {
     public static final String RESPONSE_DATA = "data";
 
     public static final int REQ_TYPE_LOGIN = 1;
-    public static final int REQ_TYPE_LOGOUT = 2;
-    public static final int REQ_TYPE_STUDENT_LIST = 3;
-    public static final int REQ_TYPE_STUDENT_PRESENCE = 4;
-    public static final int REQ_TYPE_ADD_IZIN = 5;
-    public static final int REQ_TYPE_CHECK_BALANCE = 6;
-    public static final int REQ_TYPE_PROFILE = 7;
-    public static final int REQ_TYPE_EDIT_PROFILE = 8;
-    public static final int REQ_TYPE_SEND_PICKUP = 9;
-    public static final int REQ_TYPE_EDIT_PASSWORD = 10;
-
+    public static final int REQ_TYPE_STUDENT_LIST = 2;
+    public static final int REQ_TYPE_STUDENT_PRESENCE = 3;
+    public static final int REQ_TYPE_ADD_IZIN = 4;
+    public static final int REQ_TYPE_CHECK_BALANCE = 5;
+    public static final int REQ_TYPE_PROFILE = 6;
+    public static final int REQ_TYPE_EDIT_PROFILE = 7;
+    public static final int REQ_TYPE_SEND_PICKUP = 8;
+    public static final int REQ_TYPE_EDIT_PASSWORD = 9;
+    public static final int REQ_TYPE_GET_PESAN = 10;
+    public static final int REQ_TYPE_CREATE_PESAN = 11;
 
 
     private static final String API_ENDPOINT = "http://api.dasmartschool.com";
@@ -70,6 +70,8 @@ public class VolleyTaskService extends Service {
     private static final String EDIT_PROFILE_URL = "smartparent/edit_profile";
     private static final String ADD_PICKUP_URL = "smartparent/add_penjemputan";
     private static final String EDIT_PASSWORD_URL = "smartparent/edit_password";
+    private static final String GET_PESAN_URL = "smartparent/get_pesan";
+    private static final String CREATE_PESAN_URL = "smartparent/create_pesan";
 
     // bound activity
     private Callback activityCallback;
@@ -166,7 +168,6 @@ public class VolleyTaskService extends Service {
     }
 
 
-
     private void addToRequestQueue(int requestType, Request<String> request) {
         request.setRetryPolicy(new DefaultRetryPolicy(TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -209,7 +210,7 @@ public class VolleyTaskService extends Service {
     }
 
     private String getURL(String url) {
-        return API_ENDPOINT + "/"+ url;
+        return API_ENDPOINT + "/" + url;
     }
 
     public void registerCallback(Callback activityCallback) {
@@ -301,7 +302,22 @@ public class VolleyTaskService extends Service {
         addToRequestQueue(REQ_TYPE_EDIT_PASSWORD, request);
     }
 
+    public void readMessage(String username, String kelas) {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("id_kelas", kelas);
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(GET_PESAN_URL), REQ_TYPE_GET_PESAN, params, getDefaultHeaders());
+        addToRequestQueue(REQ_TYPE_GET_PESAN, request);
+    }
 
+    public void replyMessage(String username, String id_kelas, String content) {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("id_kelas", id_kelas);
+        params.put("content", content);
 
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(CREATE_PESAN_URL), REQ_TYPE_CREATE_PESAN, params, getDefaultHeaders());
+        addToRequestQueue(REQ_TYPE_CREATE_PESAN, request);
+    }
 
 }

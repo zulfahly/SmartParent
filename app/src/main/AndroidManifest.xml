@@ -29,7 +29,9 @@
         <activity android:name=".view.studentBalance.BalanceActivity" />
         <activity android:name=".view.permit.PermitActivity" />
         <activity android:name=".view.profile.ProfileActivity" />
-        <activity android:name=".view.message.MessageActivity" />
+        <activity android:name=".view.message.MessageActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".view.presence.PresenceActivity" />
         <activity android:name=".view.student.SelectStudentActivity" />
         <activity android:name=".view.pickUpStudent.PickUpStudentActivity" />

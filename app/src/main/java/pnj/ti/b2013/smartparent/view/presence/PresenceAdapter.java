@@ -57,7 +57,7 @@ public class PresenceAdapter extends RecyclerView.Adapter<PresenceAdapter.ViewHo
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private View view;
         private TextView studentName;
         private TextView presenceDate;

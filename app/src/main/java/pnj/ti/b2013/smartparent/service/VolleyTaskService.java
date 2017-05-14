@@ -57,6 +57,7 @@ public class VolleyTaskService extends Service {
     public static final int REQ_TYPE_EDIT_PASSWORD = 9;
     public static final int REQ_TYPE_GET_PESAN = 10;
     public static final int REQ_TYPE_CREATE_PESAN = 11;
+    public static final int REQ_TYPE_SET_LIMIT_BALANCE = 12;
 
 
     private static final String API_ENDPOINT = "http://api.dasmartschool.com";
@@ -72,6 +73,7 @@ public class VolleyTaskService extends Service {
     private static final String EDIT_PASSWORD_URL = "smartparent/edit_password";
     private static final String GET_PESAN_URL = "smartparent/get_pesan";
     private static final String CREATE_PESAN_URL = "smartparent/create_pesan";
+    private static final String SET_BALANCE_LIMIT_URL = "smartparent/set_limit_saldo";
 
     // bound activity
     private Callback activityCallback;
@@ -318,6 +320,15 @@ public class VolleyTaskService extends Service {
 
         StringRequest request = composeStringRequest(Request.Method.POST, getURL(CREATE_PESAN_URL), REQ_TYPE_CREATE_PESAN, params, getDefaultHeaders());
         addToRequestQueue(REQ_TYPE_CREATE_PESAN, request);
+    }
+
+    public void setLimit(String nis, String limit) {
+        Map<String, String> params = new HashMap<>();
+        params.put("nis", nis);
+        params.put("limit", limit);
+
+        StringRequest request = composeStringRequest(Request.Method.POST, getURL(SET_BALANCE_LIMIT_URL), REQ_TYPE_SET_LIMIT_BALANCE, params, getDefaultHeaders());
+        addToRequestQueue(REQ_TYPE_SET_LIMIT_BALANCE, request);
     }
 
 }

@@ -52,7 +52,7 @@ public class PresenceActivity extends BaseActivity {
             public void run() {
                 initUI();
             }
-        }, 3000);
+        }, 1500);
     }
 
     private void initUI() {

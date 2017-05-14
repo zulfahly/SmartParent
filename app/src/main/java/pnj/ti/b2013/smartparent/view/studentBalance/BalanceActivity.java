@@ -1,9 +1,13 @@
 package pnj.ti.b2013.smartparent.view.studentBalance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +23,7 @@ import pnj.ti.b2013.smartparent.model.Balance;
 import pnj.ti.b2013.smartparent.model.Student;
 import pnj.ti.b2013.smartparent.service.VolleyTaskService;
 import pnj.ti.b2013.smartparent.view.BaseActivity;
+import pnj.ti.b2013.smartparent.view.MainActivity;
 
 public class BalanceActivity extends BaseActivity {
 
@@ -30,6 +35,8 @@ public class BalanceActivity extends BaseActivity {
     Student student;
     Balance balance;
     ArrayList<Balance> balanceList;
+    Button btnSendLimit;
+    EditText valueLimit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +51,14 @@ public class BalanceActivity extends BaseActivity {
             public void run() {
                 initUI();
             }
-        }, 3000);
+        }, 1500);
     }
 
     private void initUI() {
         setToolbar("Saldo", true);
 
-
+        btnSendLimit = (Button) findViewById(R.id.btnSubmitLimit);
+        valueLimit = (EditText) findViewById(R.id.valueLimit);
         currentBalance = (TextView) findViewById(R.id.saldoValue);
         balanceDateHistory = (TextView) findViewById(R.id.infoSaldoDate);
         topupBalanceHistory = (TextView) findViewById(R.id.infoSaldoValue);
@@ -58,12 +66,21 @@ public class BalanceActivity extends BaseActivity {
         currentBalance.setText(getString(R.string.rupiah) + student.debit);
 
         getBalance();
+
+        btnSendLimit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setLimit();
+            }
+        });
     }
 
-    @Override
-    public void onConnect() {
-        super.onConnect();
-
+    private void setLimit() {
+        if (getTaskService() != null) {
+            getTaskService().setLimit(student.NIS,valueLimit.getText().toString());
+        } else {
+            Toast.makeText(this, "Check Your Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void getBalance() {
@@ -89,6 +106,15 @@ public class BalanceActivity extends BaseActivity {
                         balanceDateHistory.setText(balanceList.get(0).tanggal);
                         topupBalanceHistory.setText(getString(R.string.sejumlah)+" "+getString(R.string.rupiah) +balanceList.get(0).jumlah_debit);
                     }
+                    break;
+                case VolleyTaskService.REQ_TYPE_SET_LIMIT_BALANCE:
+                    extras = new Bundle();
+                    extras.putParcelable("student", student);
+
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtras(extras);
+                    Toast.makeText(this,"Pengaturan Limit Sukses",Toast.LENGTH_LONG).show();
+                    startActivity(intent);
                     break;
             }
         } else {

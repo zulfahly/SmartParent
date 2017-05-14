@@ -132,24 +132,25 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/valueLimit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/large_padding"
                     android:hint="@string/hint_saldo"/>
 
                 <Button
-                android:id="@+id/loginButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:height="@dimen/action_button_min_height_material"
-                android:background="@drawable/selectable_primary"
-                android:text="@string/submit"
-                android:textColor="@color/button_title_color"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/large_padding"
-                android:layout_marginLeft="@dimen/large_padding"/>
+                    android:id="@+id/btnSubmitLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/large_padding"
+                    android:layout_marginRight="@dimen/large_padding"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:height="@dimen/action_button_min_height_material"
+                    android:background="@drawable/selectable_primary"
+                    android:text="@string/submit"
+                    android:textColor="@color/button_title_color" />
 
             </LinearLayout>
 

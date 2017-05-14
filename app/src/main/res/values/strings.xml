@@ -32,4 +32,14 @@
     <string name="rupiah">Rp.</string>
     <string name="keterangan">Keterangan : </string>
     <string name="sejumlah">Sejumlah </string>
+
+    <string name="hint_saldo">Masukkan nominal disini</string>
+    <string name="txtInputSaldo">Pengaturan batas harian uang saku :</string>
+    <string name="submit">Submit</string>
+    <string name="txtKeteranganSaldo">Telah diisi pada : </string>
+    <string name="txtRiwayatSaldo">Riwayat Pengisian</string>
+    <string name="txtSaldo">Saldo</string>
+    <string name="txtInfoSaldo">INFO SALDO</string>
+    <string name="titikDua"> : </string>
+
 </resources>

@@ -281,7 +281,7 @@ public class VolleyTaskService extends Service {
 
     public void addPickup(final String name, String ktp, String telepon, String nis, String relation) {
         Map<String, String> params = new HashMap<>();
-        params.put("username", name);
+        params.put("nama", name);
         params.put("ktp", ktp);
         params.put("nomor_hp", telepon);
         params.put("nis", nis);

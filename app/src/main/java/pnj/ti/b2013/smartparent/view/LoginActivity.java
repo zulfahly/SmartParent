@@ -128,24 +128,19 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void receive(int type, boolean success, Bundle extras) {
-       Log.e(TAG,"On Receive");
         if (success) {
             switch (type) {
                 case VolleyTaskService.REQ_TYPE_LOGIN:
-                    progressDialog.dismiss();
                     Preferences.getInstance(this).storeString(Preferences.PROFILE, extras.getString(VolleyTaskService.RESPONSE_DATA));
 
                     Intent intent = new Intent(this, SelectStudentActivity.class);
-//                    extras.putString("username",usernameField.getText().toString());
 
                     if (getIntent() != null && getIntent().getExtras() != null) {
                         intent.putExtras(getIntent().getExtras());
                     }
 
-                    Log.e(TAG,"Extras : login "+extras);
                     startActivity(intent);
                     finish();
-
                     break;
             }
         } else {
@@ -155,28 +150,6 @@ public class LoginActivity extends BaseActivity {
                     .show();
         }
     }
-
-//    private void forgotPassword() {
-//        View forgotPassword = getLayoutInflater().inflate(R.layout.popup_forgot_password, null);
-//        alertDialog = new AlertDialog.Builder(this).setView(forgotPassword).show();
-//
-//        final EditText usernameField = (EditText) forgotPassword.findViewById(R.id.forgotUsernameField);
-//        Button resetButton = (Button) forgotPassword.findViewById(R.id.forgotResetButton);
-//
-//        resetButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//
-//                progressDialog.setMessage(getString(R.string.loading));
-//                progressDialog.setCancelable(false);
-//                progressDialog.show();
-//
-//                // TODO: forgot password
-//                // getTaskService().performForgotPass(usernameField.getText().toString());
-//            }
-//        });
-// }
 
 
 

@@ -37,10 +37,26 @@
         <activity android:name=".view.pickUpStudent.PickUpStudentActivity" />
         <activity android:name=".view.profile.ChangePassword" />
 
-        <service android:name=".service.VolleyTaskService" />
+
 
         <activity android:name=".view.phonecall.PhonecallActivity" />
         <activity android:name=".view.canteen.CanteenActivity"></activity>
+
+        <service android:name=".service.VolleyTaskService" />
+
+        <service
+            android:name=".service.MyFirebaseInstancedIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

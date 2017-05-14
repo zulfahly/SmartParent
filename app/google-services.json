@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "473648313808",
+    "firebase_url": "https://smartschool-a52dc.firebaseio.com",
+    "project_id": "smartschool-a52dc",
+    "storage_bucket": "smartschool-a52dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473648313808:android:aab396cffa55f7a2",
+        "android_client_info": {
+          "package_name": "pnj.ti.b2013.smartparent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473648313808-7e3f4hcn7kfdaaplqeqtbl6d9imm0trc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pnj.ti.b2013.smartparent",
+            "certificate_hash": "14006574e99304c3e8ad7ef776587689ca5e7aa3"
+          }
+        },
+        {
+          "client_id": "473648313808-8unvtdff0a79qbrkh17b7ojrv4pg11cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQry9DlPoLF-hNw0ROoFh9e_zKaTXIllU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473648313808-8unvtdff0a79qbrkh17b7ojrv4pg11cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473648313808:android:201957146bec866f",
+        "android_client_info": {
+          "package_name": "pnj.ti.b2013.smartschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473648313808-8unvtdff0a79qbrkh17b7ojrv4pg11cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQry9DlPoLF-hNw0ROoFh9e_zKaTXIllU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar_igrow"/>
+        <include layout="@layout/toolbar_igrow" />
 
         <FrameLayout
             android:id="@+id/mainFrameContainer"
@@ -27,25 +27,6 @@
                 android:layout_margin="@dimen/medium_padding"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pengaturan Penjemputan"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Anak akan dijemput dengan : "
-                    android:textSize="14sp"
-                    android:layout_marginTop="@dimen/large_padding"/>
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -54,7 +35,8 @@
                         android:id="@+id/Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nama Penjemput" />
+                        android:hint="Nama Penjemput"
+                        android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -65,7 +47,8 @@
                         android:id="@+id/ktpId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nomer KTP" />
+                        android:hint="Nomer KTP"
+                        android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -76,7 +59,8 @@
                         android:id="@+id/relation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Hubungan" />
+                        android:hint="Hubungan"
+                        android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -84,10 +68,11 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/PhoneNumber"
+                        android:id="@+id/telepon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nomer Handphone Penjemput" />
+                        android:hint="Nomer Handphone Penjemput"
+                        android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.v7.widget.AppCompatButton
@@ -96,17 +81,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/large_padding"
                     android:background="@drawable/selectable_primary"
-                    android:textColor="@color/button_title_color"
-                    android:text="Submit"/>
+                    android:text="Submit"
+                    android:textColor="@color/button_title_color" />
 
             </LinearLayout>
 
         </FrameLayout>
 
     </RelativeLayout>
-
-
-
 
 
 </LinearLayout>

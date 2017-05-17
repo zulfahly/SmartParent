@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -100,10 +101,33 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void saveProfile(){
-        if (getTaskService().isNetworkAvailable()){
-            getTaskService().editProfile(profile.username,address.getText().toString(),phoneNumber.getText().toString());
+
+        if(validation()){
+            if (getTaskService().isNetworkAvailable()){
+                getTaskService().editProfile(profile.username,address.getText().toString(),phoneNumber.getText().toString());
+            }
+            else{
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.failed))
+                        .setMessage(R.string.no_internet)
+                        .show();
+            }
+
         }
 
+    }
+
+    private boolean validation(){
+        boolean valid = true;
+        if(TextUtils.isEmpty(address.getText().toString())) {
+            address.setError(getString(R.string.empty_form));
+            address.requestFocus();
+            valid = false;
+        }else if(TextUtils.isEmpty(phoneNumber.getText().toString())){
+            phoneNumber.setError(getString(R.string.empty_form));
+            phoneNumber.requestFocus();
+        }
+        return valid;
     }
 
     @Override

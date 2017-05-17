@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -84,12 +85,18 @@ public class BalanceActivity extends BaseActivity {
     }
 
     private void getBalance() {
-        if (getTaskService() != null) {
-            getTaskService().checkBalance(student.NIS);
-            Log.e(TAG, "student balance NIS" + student.NIS);
-        } else {
-            Toast.makeText(this, "Check Your Connection", Toast.LENGTH_LONG).show();
+        if(validation()){
+            if (getTaskService().isNetworkAvailable()) {
+                getTaskService().checkBalance(student.NIS);
+                Log.e(TAG, "student balance NIS" + student.NIS);
+            } else {
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.failed))
+                        .setMessage(R.string.no_internet)
+                        .show();
+            }
         }
+
     }
 
     @Override
@@ -105,6 +112,13 @@ public class BalanceActivity extends BaseActivity {
                     if (balanceList!=null){
                         balanceDateHistory.setText(balanceList.get(0).tanggal);
                         topupBalanceHistory.setText(getString(R.string.sejumlah)+" "+getString(R.string.rupiah) +balanceList.get(0).jumlah_debit);
+
+                        if (balanceList.get(0).limit_debit!=null){
+                            valueLimit.setText(balanceList.get(0).limit_debit);
+                        }else{
+                            valueLimit.setText(" ");
+                        }
+
                     }
                     break;
                 case VolleyTaskService.REQ_TYPE_SET_LIMIT_BALANCE:
@@ -123,6 +137,16 @@ public class BalanceActivity extends BaseActivity {
                     .setMessage(extras.getString(VolleyTaskService.RESPONSE_MESSAGE))
                     .show();
         }
+    }
+
+    private boolean validation(){
+        boolean valid = true;
+        if(TextUtils.isEmpty(valueLimit.getText().toString())) {
+            valueLimit.setError(getString(R.string.empty_form));
+            valueLimit.requestFocus();
+            valid = false;
+        }
+        return valid;
     }
 
 

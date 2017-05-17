@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context="pnj.ti.b2013.smartparent.view.canteen.CanteenActivity">
 
     <RelativeLayout
-        android:id="@+id/studentEmptyView"
+        android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,6 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/mainToolbar">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recCanteen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/medium_padding"/>
 
         </FrameLayout>
 

@@ -26,6 +26,7 @@
     <string name="img_desc">Image Description</string>
     <string name="empty_username">Username is required</string>
     <string name="empty_password">Password is required</string>
+    <string name="empty_form">Tidak boleh kosong</string>
 
     <string name="darul_abidin">SDIT Darul Abidin</string>
     <string name="kelas">Kelas </string>

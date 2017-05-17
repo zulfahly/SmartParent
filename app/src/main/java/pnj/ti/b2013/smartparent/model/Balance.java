@@ -11,10 +11,12 @@ public class Balance implements Parcelable
 {
     public String tanggal;
     public String jumlah_debit;
+    public String limit_debit;
 
     protected Balance(Parcel in) {
         tanggal = in.readString();
         jumlah_debit = in.readString();
+        limit_debit = in.readString();
     }
 
     public static final Creator<Balance> CREATOR = new Creator<Balance>() {
@@ -38,5 +40,6 @@ public class Balance implements Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(tanggal);
         parcel.writeString(jumlah_debit);
+        parcel.writeString(limit_debit);
     }
 }

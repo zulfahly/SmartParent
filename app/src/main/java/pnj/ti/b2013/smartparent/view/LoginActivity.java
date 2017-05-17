@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity {
         Profile profile = Preferences.getInstance(this).getProfile();
 
         if (profile != null) {
-            Log.e(TAG,"Prefs :"+Preferences.getInstance(this).getProfile().username);
+            Log.e(TAG, "Prefs :" + Preferences.getInstance(this).getProfile().username);
             Bundle extras = new Bundle();
             Intent intent = new Intent(this, SelectStudentActivity.class);
             intent.putExtras(extras);
@@ -115,13 +115,18 @@ public class LoginActivity extends BaseActivity {
         } else {
             passwordField.clearFocus();
         }
-        if (getTaskService() != null) {
+
+
+        if (getTaskService().isNetworkAvailable()) {
             progressDialog.setMessage(getString(R.string.login_loading));
             progressDialog.show();
             Log.e(TAG, "FCM " + usernameField.getText().toString() + " " + passwordField.getText().toString());
             getTaskService().login(usernameField.getText().toString(), passwordField.getText().toString());
         } else {
-            Toast.makeText(this, "TASK Service : " + getTaskService(), Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.failed))
+                    .setMessage(R.string.no_internet)
+                    .show();
         }
 
     }
@@ -150,7 +155,6 @@ public class LoginActivity extends BaseActivity {
                     .show();
         }
     }
-
 
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,9 +55,35 @@ public class ChangePassword extends BaseActivity {
     }
 
     private void changePassword() {
-        if (getTaskService().isNetworkAvailable()){
-            getTaskService().editPassword(profile.username,oldPassword.getText().toString(),newPassword.getText().toString(), repeatPassword.getText().toString());
+        if(validation()){
+            if (getTaskService().isNetworkAvailable()){
+                getTaskService().editPassword(profile.username,oldPassword.getText().toString(),newPassword.getText().toString(), repeatPassword.getText().toString());
+            }
+            else{
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.failed))
+                        .setMessage(R.string.no_internet)
+                        .show();
+            }
         }
+
+    }
+
+
+    private boolean validation(){
+        boolean valid = true;
+        if(TextUtils.isEmpty(oldPassword.getText().toString())) {
+            oldPassword.setError(getString(R.string.empty_form));
+            oldPassword.requestFocus();
+            valid = false;
+        }else if(TextUtils.isEmpty(newPassword.getText().toString())){
+            newPassword.setError(getString(R.string.empty_form));
+            newPassword.requestFocus();
+        }else if(TextUtils.isEmpty(repeatPassword.getText().toString())){
+            repeatPassword.setError(getString(R.string.empty_form));
+            repeatPassword.requestFocus();
+        }
+        return valid;
     }
 
     @Override

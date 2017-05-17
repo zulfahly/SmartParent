@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +46,7 @@ public class PermitActivity extends BaseActivity {
     }
 
     private void initUI() {
-        setToolbar("Notifikasi",true);
+        setToolbar("Perizinan",true);
         student = getIntent().getParcelableExtra("student");
 
         studentName = (EditText) findViewById(R.id.studentName);
@@ -88,11 +89,27 @@ public class PermitActivity extends BaseActivity {
     }
 
     private void postPermitData() {
-        if (getTaskService().isNetworkAvailable()){
-            getTaskService().usePermit(studentName.getText().toString(),permitType,permitDetail.getText().toString());
-        }else {
-            Toast.makeText(getApplicationContext(),"Check Your Connection",Toast.LENGTH_SHORT).show();
+        if(validation()){
+            if (getTaskService().isNetworkAvailable()){
+                getTaskService().usePermit(studentName.getText().toString(),permitType,permitDetail.getText().toString());
+            }else {
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.failed))
+                        .setMessage(R.string.no_internet)
+                        .show();
+            }
         }
+
+    }
+
+    private boolean validation(){
+        boolean valid = true;
+        if(TextUtils.isEmpty(permitDetail.getText().toString())) {
+            permitDetail.setError(getString(R.string.empty_form));
+            permitDetail.requestFocus();
+            valid = false;
+        }
+        return valid;
     }
 
 

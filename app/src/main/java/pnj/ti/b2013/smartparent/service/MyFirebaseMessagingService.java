@@ -24,14 +24,12 @@ import org.json.JSONObject;
 import java.util.List;
 
 import pnj.ti.b2013.smartparent.R;
+import pnj.ti.b2013.smartparent.controller.Config;
+import pnj.ti.b2013.smartparent.util.Preferences;
 import pnj.ti.b2013.smartparent.view.LoginActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-    private static final String TYPE_NOTIFICATION = "1";
-    private static final String TYPE_BC = "2";
-    private static final String TYPE_VISIT = "7";
-    private static final String TYPE_NEED_REPORT = "8";
     Context context;
     JSONObject data;
 
@@ -43,58 +41,67 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        data = new JSONObject(remoteMessage.getData());
-        Log.e(TAG,"data notif"+data.toString());
-        String title = "";
-        String body = "";
-        String type = "";
+
         try {
-            title = data.getString("title");
-            body = data.getString("content");
-            type = data.getString("type");
-            this.sendNotification(title, body, type);
+            data = new JSONObject(remoteMessage.getData().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        Log.e(TAG,"data notif"+data.toString());
+        String title = "";
+        String body = "";
+        String timestamp = "";
+        if (remoteMessage.getData().size() > 0){
+            try {
+                JSONObject data2 = data.getJSONObject("data");
+                title = data2.getString("title");
+                body = data2.getString("message");
+                timestamp = data2.getString("timestamp");
+                this.sendNotification(title, body, timestamp);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-    }
-
-    private void sendNotification(String title, String body, String type) {
-        if (!isAppIsInBackground(getApplicationContext())) {
-            setNotificationBigStyle(title, body, type);
-        } else {
-           setNotificationBigStyle(title, body, type);
         }
     }
 
-    public void setNotificationBigStyle(String title, String body, String type) {
-       // Preferences.getInstance(getApplicationContext()).storeNotifId(Config.PUSH_NOTIFICATION_ID);
+    private void sendNotification(String title, String body, String timestamp) {
+        if (!isAppIsInBackground(getApplicationContext())) {
+            setNotificationBigStyle(title, body, timestamp);
+        } else {
+           setNotificationBigStyle(title, body, timestamp);
+        }
+    }
+
+    public void setNotificationBigStyle(String title, String body, String timestamp) {
+        Preferences.getInstance(getApplicationContext()).storeNotifId(Config.PUSH_NOTIFICATION_ID);
 
         builder = new NotificationCompat.Builder(this);
         bigTextStyle = new NotificationCompat.BigTextStyle();
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Bitmap icon = BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.ic_launcher);
+                R.drawable.ic_smartparent);
         bigTextStyle.bigText(body).setBigContentTitle(title);
         Bundle extras = new Bundle();
-        extras.putString("type", type);
+//        extras.putString("type", type);
 
         Intent redirectIntent = new Intent(this, LoginActivity.class);
         redirectIntent.putExtras(extras);
 
         builder.setContentTitle(title)
-                .setContentText(body)
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true)
                 .setLargeIcon(icon)
-                //.setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setStyle(bigTextStyle);
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(body))
+                .setContentText(body);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, redirectIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //notificationManager.notify(Preferences.getInstance(getApplicationContext()).getNotifId(Config.PUSH_NOTIFICATION_ID), builder.build());
+        notificationManager.notify(Preferences.getInstance(getApplicationContext()).getNotifId(Config.PUSH_NOTIFICATION_ID), builder.build());
 
     }
 

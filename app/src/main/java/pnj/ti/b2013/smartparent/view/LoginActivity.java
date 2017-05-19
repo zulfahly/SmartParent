@@ -1,6 +1,8 @@
 package pnj.ti.b2013.smartparent.view;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import pnj.ti.b2013.smartparent.R;
 import pnj.ti.b2013.smartparent.model.Profile;
@@ -34,6 +38,15 @@ public class LoginActivity extends BaseActivity {
     EditText passwordField;
     Button loginButton;
     ProgressDialog progressDialog;
+    String fcmToken;
+
+    BroadcastReceiver tokenReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            fcmToken = intent.getStringExtra("token");
+            Log.e(TAG, "onReceive: fcm-token = " + fcmToken);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +92,10 @@ public class LoginActivity extends BaseActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-//                fcmToken = FirebaseInstanceId.getInstance().getToken();
+                fcmToken = FirebaseInstanceId.getInstance().getToken();
                 progressDialog.dismiss();
-//                Log.e(TAG, "FCM TOKEN ON START " + fcmToken);
-//                LocalBroadcastManager.getInstance(LoginActivity.this).registerReceiver(tokenReceiver, new IntentFilter("tokenReceiver"));
+                Log.e(TAG, "FCM TOKEN ON START " + fcmToken);
+                LocalBroadcastManager.getInstance(LoginActivity.this).registerReceiver(tokenReceiver, new IntentFilter("tokenReceiver"));
             }
         }, 3000);
 
@@ -120,8 +133,8 @@ public class LoginActivity extends BaseActivity {
         if (getTaskService().isNetworkAvailable()) {
             progressDialog.setMessage(getString(R.string.login_loading));
             progressDialog.show();
-            Log.e(TAG, "FCM " + usernameField.getText().toString() + " " + passwordField.getText().toString());
-            getTaskService().login(usernameField.getText().toString(), passwordField.getText().toString());
+            Log.e(TAG, "FCM " + fcmToken);
+            getTaskService().login(usernameField.getText().toString(), passwordField.getText().toString(),fcmToken);
         } else {
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.failed))
@@ -156,5 +169,21 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(tokenReceiver,
+                new IntentFilter("tokenReceiver"));
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(tokenReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+            super.onDestroy();
+    }
 }

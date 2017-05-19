@@ -221,11 +221,11 @@ public class VolleyTaskService extends Service {
         this.activityCallback = activityCallback;
     }
 
-    public void login(final String username, final String password) {
+    public void login(final String username, final String password, final String fcmToken) {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
-//        params.put("gcm_token", fcmToken);
+        params.put("fcm_token", fcmToken);
 
         StringRequest request = composeStringRequest(Request.Method.POST, getURL(LOGIN_URL), REQ_TYPE_LOGIN, params, null);
         addToRequestQueue(REQ_TYPE_LOGIN, request);

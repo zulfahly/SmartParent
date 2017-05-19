@@ -77,24 +77,29 @@ public class BalanceActivity extends BaseActivity {
     }
 
     private void setLimit() {
-        if (getTaskService() != null) {
-            getTaskService().setLimit(student.NIS,valueLimit.getText().toString());
-        } else {
-            Toast.makeText(this, "Check Your Connection", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void getBalance() {
         if(validation()){
-            if (getTaskService().isNetworkAvailable()) {
-                getTaskService().checkBalance(student.NIS);
-                Log.e(TAG, "student balance NIS" + student.NIS);
+            if (getTaskService() != null) {
+                getTaskService().setLimit(student.NIS,valueLimit.getText().toString());
             } else {
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.failed))
                         .setMessage(R.string.no_internet)
                         .show();
             }
+        }
+
+    }
+
+    private void getBalance() {
+
+        if (getTaskService().isNetworkAvailable()) {
+            getTaskService().checkBalance(student.NIS);
+            Log.e(TAG, "student balance NIS" + student.NIS);
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.failed))
+                    .setMessage(R.string.no_internet)
+                    .show();
         }
 
     }
@@ -120,7 +125,9 @@ public class BalanceActivity extends BaseActivity {
                         }
 
                     }
+
                     break;
+
                 case VolleyTaskService.REQ_TYPE_SET_LIMIT_BALANCE:
                     extras = new Bundle();
                     extras.putParcelable("student", student);
